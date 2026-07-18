@@ -2,4 +2,4 @@ name: astrbot_plugin_audio_ears
 desc: 小耳朵：语音与音乐听觉理解，让主模型直接听见声音
 version: 0.2.0
 author: Xavier
-repo: ""
+repo: https://github.com/cyan-riverr/astrbot_plugin_audio_ears
