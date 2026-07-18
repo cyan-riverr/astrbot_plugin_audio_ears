@@ -1,0 +1,119 @@
+{
+  "voice_api_tier": {
+    "type": "string",
+    "default": "自动模式",
+    "description": "听法档位",
+    "hint": "省钱转写=只听原话；小耳朵报告=听原话+声音形状；直听模式=原声直接给主模型；自动模式=主模型能直听就直听，不能就走报告。",
+    "options": [
+      "省钱转写",
+      "小耳朵报告",
+      "直听模式",
+      "自动模式"
+    ],
+    "labels": [
+      "省钱转写（只听原话）",
+      "小耳朵报告（听原话+声音形状）",
+      "直听模式（主模型直接听原声）",
+      "自动模式（推荐）"
+    ]
+  },
+  "provider_id": {
+    "type": "string",
+    "default": "",
+    "description": "语音听觉LLM提供商",
+    "hint": "从 AstrBot 已配置的 LLM 供应商里选择。用于听写/报告。直听模式主要看主模型能不能听音频。",
+    "_special": "select_provider"
+  },
+  "provider_fallback_ids": {
+    "type": "list",
+    "default": [],
+    "description": "语音听觉备用LLM提供商",
+    "hint": "主供应商失败时按顺序切换。",
+    "_special": "select_providers"
+  },
+  "enable_group_voice": {
+    "type": "bool",
+    "default": false,
+    "description": "群聊也听语音",
+    "hint": "默认只在私聊听。打开后群里语音/音频文件也会进小耳朵。"
+  },
+  "group_voice_whitelist": {
+    "type": "list",
+    "default": [],
+    "description": "群聊白名单",
+    "hint": "填群号。留空=所有群都听；填了=只听名单里的群。仅在【群聊也听语音】打开时有效。"
+  },
+  "protect_terms": {
+    "type": "list",
+    "default": [
+      "宝宝",
+      "宝贝"
+    ],
+    "description": "亲密称呼保护表",
+    "hint": "语音识别容易把【宝宝】误听成【爸爸】，这些词会被特殊保护。"
+  },
+  "max_audio_mb": {
+    "type": "int",
+    "default": 20,
+    "description": "最大音频大小MB",
+    "hint": "语音、音频文件、音乐共用上限。"
+  },
+  "ffmpeg_path": {
+    "type": "string",
+    "default": "",
+    "description": "ffmpeg路径",
+    "hint": "留空自动查找。找不到时手动填完整路径。"
+  },
+  "hearing": {
+    "type": "object",
+    "description": "音乐听觉",
+    "hint": "播放/分享歌曲时怎么听。",
+    "items": {
+      "mode": {
+        "type": "string",
+        "default": "hybrid",
+        "description": "音乐听法",
+        "hint": "本地分析=不调用API；直接听=只调用模型；混合=本地骨架+模型时间轴（推荐）。",
+        "options": [
+          "local",
+          "gemini",
+          "hybrid"
+        ],
+        "labels": [
+          "本地分析",
+          "直接听",
+          "混合听感（推荐）"
+        ]
+      },
+      "gemini_provider_id": {
+        "type": "string",
+        "default": "",
+        "description": "音乐听觉LLM提供商",
+        "hint": "留空=跟随上方语音供应商。",
+        "_special": "select_provider"
+      },
+      "gemini_provider_fallback_ids": {
+        "type": "list",
+        "default": [],
+        "description": "音乐听觉备用LLM提供商",
+        "_special": "select_providers"
+      },
+      "notify_when_ready": {
+        "type": "bool",
+        "default": true,
+        "description": "听完后主动发消息"
+      },
+      "auto_feeling_when_ready": {
+        "type": "bool",
+        "default": true,
+        "description": "听完后自然聊感受",
+        "hint": "开启后不发固定文案，让角色根据听觉材料自己开口。"
+      },
+      "lyric_only_fallback": {
+        "type": "bool",
+        "default": true,
+        "description": "音频失败时用歌词兜底"
+      }
+    }
+  }
+}
